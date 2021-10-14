@@ -1,0 +1,125 @@
+.headercontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header{
+    background-color: #007092;
+    box-shadow: 0 0 13px -3px rgb(0 0 0 / 10%);
+    border: 1px solid rgba(182,182,182,.1);
+    height: 55px;  
+    display: flex;
+    align-items: center;
+}
+
+.burgermenucontainer{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#burgermenuimg{
+    width: auto;
+    height: 20px;
+    margin: 0px;
+}
+
+.headertitle{
+    color: white;
+    margin: 0px;
+    margin-right: 5px;
+    padding: 0px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.headertime{
+    color: white;
+    margin: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    align-self: center;
+    padding: 0px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.headeruserdata{
+    color: #FFFFFF;
+    display: flex;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.Logo{
+    margin-left: 15px;
+}
+
+.profilepiccontainer{
+    display: flex;
+    margin-right: 15px;
+}
+
+#profilepic{
+    width: 40px;
+    height: auto;
+    margin: 0px;
+}
+
+#headerusercontact{
+    align-self: center;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform:uppercase;
+}
+
+#headeruserprofile{
+    align-self: center;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.dropdowncontainer{
+    width: auto;
+    height: auto;
+    background-color: white;
+    position: absolute;
+    top:55px;
+    right:0;
+    padding: 8px;
+    display: flex;
+    margin-right: 5px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 0 13px -3px rgb(0 0 0 / 10%);
+    border: 1px solid rgba(182,182,182,.1);
+}
+
+.DropDownButton{
+    border: 0px;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: #DADAE7;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.DropDownText{
+    color: black;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+}

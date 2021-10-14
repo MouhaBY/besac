@@ -1,0 +1,28 @@
+.navigationcontainer{
+    width: 300px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 0 13px -3px rgb(0 0 0 / 10%);
+    border: 1px solid rgba(182,182,182,.1);
+}
+
+#mainlogocontainer{
+    display: flex;
+    height: 55px;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 0 13px -3px rgb(0 0 0 / 10%);
+    border: 1px solid rgba(182,182,182,.1);
+}
+
+#mainlogo{
+    margin: 0;
+    width:90%;
+    height:auto;
+    align-self: center;
+}

@@ -1,0 +1,39 @@
+.SubSideContainer{
+    display: flex;
+    height: 35px;
+    width: 100%;
+    justify-content: flex-start;
+    border-width:2px;
+    border-style:solid;
+    border-color:#F5F5F5;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+}
+
+.SubSideContainer:hover{
+    background-color: #FFE707;
+}
+
+.SubSideButtonText{
+    margin: 0px;
+    color: #404852;
+    font-size: 14px;
+    font-weight: normal;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.square{
+    width: 12px;
+    height: auto;
+    margin: 0px;
+    margin-left: 60px;
+    margin-right: 15px;
+}
+
+.subsidelink{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+}

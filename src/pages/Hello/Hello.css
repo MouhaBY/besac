@@ -1,0 +1,12 @@
+.HelloContainer{
+    background-color: white;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+.test{
+    color:black;
+}

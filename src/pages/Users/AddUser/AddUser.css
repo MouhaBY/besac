@@ -1,0 +1,106 @@
+.AddContainer{
+    background-color: white;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
+}
+
+.formTitle{
+    color: black;
+}
+
+.red-formTitle{
+    color: red;
+}
+
+.formInput{
+    color: black;
+    padding: 5px;
+    border-width: 1px;
+    border-style: solid;
+    height: 50px;
+    border-color: gray;
+    border-radius: 3px;
+}
+
+.red-formInput{
+    color: black;
+    padding: 5px;
+    border-width: 1px;
+    border-style: solid;
+    height: 30px;
+    border-color: red;
+    border-radius: 3px;
+}
+
+.checkboxInput{
+    border-width: 1px;
+    border-style: solid;
+    height: 50px;
+    width: auto;
+    margin: 0px;
+    margin-left: 25px;
+}
+
+.checkBoxContainer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+
+#saveButton{
+    background-color: #09B76B;
+    border-width: 0px;
+    border-radius: 3px;
+    height: 40px;
+    width: 100px;
+    color: white;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+    margin: 5px;
+    padding: 0px;
+}
+
+#saveButton:hover{
+    background-color: #079356;
+}
+
+.Buttons{
+    align-self: flex-end;
+    flex-direction: row;
+}
+
+#backButton{
+    background-color: transparent;
+    border-width: 1px;
+    border-radius: 3px;
+    height: 40px;
+    width: 100px;
+    color: gray;
+    border-color: gray;
+    border-style: solid;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+    align-self: flex-end;
+    margin: 0px;
+    padding: 0px;
+}
+
+#backButton:hover{
+    background-color: gray;
+    color: white;
+}
+
+.errorMsg{
+    color: red;
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+    align-self: flex-end;
+    margin-right: 15px;
+}
