@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ViewUser.css';
+//import './ViewUser.css';
 import { getUser } from '../../../WS/API';
 import { useHistory, useParams } from "react-router-dom";
 

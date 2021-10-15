@@ -56,7 +56,7 @@ function ListUsers(){
 
     return(
         <div className="UsersContainer">
-            <h2 className="Userstitle">Utilisateurs / Comptes des utilisateurs</h2>
+            <h2 className="maintitle">Utilisateurs / Comptes des utilisateurs</h2>
             <div className="UsersButtonsContainer">
                 <select id="userTypesSelector" onChange={filter}>
                     <option value="">Type de profil</option>
