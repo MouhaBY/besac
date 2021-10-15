@@ -12,7 +12,8 @@ function Login ({ setToken }){
     const [password, setPassword] = useState();
     const [errorMSG, setErrorMSG] = useState();
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
         setErrorMSG("");
         if (username && password){
             try{
@@ -49,13 +50,13 @@ function Login ({ setToken }){
                 <div className="loginformcontainer">
                     <img id="loginlogo" src={logoWhite} alt="Logo Scantech" />
                     <h1 id="solutiontitle">Scan Access Control</h1>
-                    <form id="loginform">
+                    <form id="loginform" onSubmit={handleSubmit}>
                         <label className="loginlabel" for="username">Nom d'utilisateur</label>
                         <input className="logininput" type="text" name="Nom d'utilisateur" id="username" onChange={e => setUsername(e.target.value)}/>
                         <label className="loginlabel" for="password">Mot de passe</label>
                         <input className="logininput" type="password" name="Mot de passe" id="password" onChange={e => setPassword(e.target.value)}/>
                         <span id="errorMSG">{errorMSG}</span>
-                        <input id="loginbutton" type="button" onClick={handleSubmit} value="Se connecter"/>
+                        <input id="loginbutton" type="submit" value="Se connecter"/>
                     </form>
                 </div>
             </div>

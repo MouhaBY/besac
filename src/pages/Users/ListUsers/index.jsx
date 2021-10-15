@@ -28,14 +28,16 @@ function ListUsers(){
     const { userData } = useContext(userDataContext);
     const viewUser = (data) => history.push('/users/view/'+ data._id);
     const editUser = (data) => history.push('/users/edit/'+ data._id);
+
     const delete_user = async (data) => {
+        console.log(data)
         if (data._id === userData._id){ 
             alert("Cannot delete current user"); 
         }
         else{
             const response = await deleteUser(data._id);
             alert("Utilisateur Id : "+ data._id +" "+ response?.message);
-            fetchUsers(setUsersList);
+            fetchUsers(setUsersList, setFilteredUsersList);
         }
     }
 
@@ -63,18 +65,16 @@ function ListUsers(){
                     <option value="user">Utilisateur</option>
                     <option value="admin">Administrateur</option>
                 </select>
-                { userData?.isAdmin &&
                 <a href="/users/add"><input id="addButton" type="button" value="Ajouter"/></a>
-                }
             </div>
             <div className="UsersDataTableContainer">
                 <DataTable 
                 title="Liste des comptes" 
                 headers={headers} 
                 datas={filteredUsersList} 
-                edit={userData?.isAdmin} 
+                edit={true} 
                 editFunction={editUser} 
-                deletion={userData?.isAdmin} 
+                deletion={true} 
                 deleteFunction={delete_user} 
                 view={true}
                 viewFunction={viewUser} 

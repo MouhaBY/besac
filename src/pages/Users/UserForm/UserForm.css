@@ -53,7 +53,6 @@
     font-size: 14px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: lighter;
-    align-self: flex-end;
     margin-right: 15px;
 }
 
@@ -62,6 +61,7 @@
     align-self: flex-end;
     flex-direction: row;
     margin-right: 20px;
+    justify-content: center;
 }
 
 #saveButton{

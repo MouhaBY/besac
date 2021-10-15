@@ -40,7 +40,7 @@ function Header({ setToken }) {
                 </h1>
                 <div className="headeruserdata">
                     <span id="headerusercontact">{userData?.contact }</span>
-                    <span id="headeruserprofile">{userData?.isAdmin ? "(Administrateur)" : "(Utilisateur)"}</span>
+                    <span id="headeruserprofile">{"(" + userData?.profile + ")" }</span>
                 </div>
                 <div className="profilepiccontainer" onClick={showMenu}>
                     <img id="profilepic" src={profilePic} alt="Profile" />
