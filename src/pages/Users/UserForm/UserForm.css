@@ -83,7 +83,7 @@
 }
 
 #formeditButton{
-    background-color: lightblue;
+    background-color: #1094F7;
     border-width: 0px;
     border-radius: 3px;
     height: 40px;
@@ -97,7 +97,7 @@
 }
 
 #formeditButton:hover{
-    background-color: blue;
+    background-color: #077FD9;
 }
 
 #backButton{
@@ -106,8 +106,8 @@
     border-radius: 3px;
     height: 40px;
     width: 100px;
-    color: gray;
-    border-color: lightgray;
+    color: #1094F7;
+    border-color: #1094F7;
     border-style: solid;
     font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -118,6 +118,6 @@
 }
 
 #backButton:hover{
-    background-color: lightgray;
+    background-color: #1094F7;
     color: white;
 }

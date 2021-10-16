@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from '../../components/DataTable';
-import { profiles_list } from '../../utils/profiles';
+import { bare_profiles_list } from '../../utils/profiles';
 
 const headers = [
     {reference: "_id", name: "Id"}, 
@@ -8,28 +8,28 @@ const headers = [
     {reference: "isActive",  name: "Actif", type:"bool"}, 
 ];
 
-const fetchUsers = (func1, func2) => {
-        func1(profiles_list);
-        func2(profiles_list)
+const fetchProfiles = (func1, func2) => {
+        func1(bare_profiles_list);
+        func2(bare_profiles_list)
 }
 
 function ListProfiles(){
-    const [usersList, setUsersList] = useState([]);
-    const [filteredUsersList, setFilteredUsersList] = useState([]);
+    const [profilesList, setProfilesList] = useState([]);
+    const [filteredProfilesList, setFilteredProfilesList] = useState([]);
 
     const filter = (e) => {
         let filterBy = e.target.value;
         if (filterBy === ""){
-            setFilteredUsersList(usersList);
+            setFilteredProfilesList(profilesList);
         }
         else{
-            let filtered_users_list = usersList.filter(user => (user.isActive === (e.target.value === "active")))
-            setFilteredUsersList(filtered_users_list)
+            let filtered_profiles_list = profilesList.filter(profile => (profile.isActive === (e.target.value === "active")))
+            setFilteredProfilesList(filtered_profiles_list)
         }
     }
 
     useEffect(() => {
-        fetchUsers(setUsersList, setFilteredUsersList);
+        fetchProfiles(setProfilesList, setFilteredProfilesList);
     },[])
 
     return(
@@ -46,7 +46,7 @@ function ListProfiles(){
                 <DataTable 
                 title="Liste des comptes" 
                 headers={headers} 
-                datas={filteredUsersList} 
+                datas={filteredProfilesList} 
                 />
             </div>
         </div>

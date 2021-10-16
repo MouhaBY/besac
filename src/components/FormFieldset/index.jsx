@@ -7,7 +7,7 @@ function FormFieldset ({ value, setValue={nothingToDo}, choiceslist, type="text"
         type === "checkbox" ?
             <fieldset className="checkBoxContainer">
                 <label className="formTitle">{title}</label>
-                <input className="checkboxInput" type="checkbox" name={id} id={id} onChange={setValue} defaultChecked={value} disabled={disabled ? "disabled" : null} />
+                <input className="checkboxInput" type="checkbox" name={id} id={id} onChange={setValue} checked={value} disabled={disabled ? "disabled" : null} />
             </fieldset>
         :
             <fieldset className="forminputs">
