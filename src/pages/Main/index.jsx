@@ -10,6 +10,7 @@ import ListUsers from '../Users/ListUsers';
 import AddUser from '../Users/AddUser';
 import EditUser from '../Users/EditUser';
 import ViewUser from '../Users/ViewUser';
+import Profiles from '../Profiles';
 import { ShowBarProvider, userDataContext } from '../../utils/context';
 import { useEffect } from 'react';
 import { getUser } from '../../WS/API';
@@ -60,6 +61,9 @@ function Main({ setToken }){
                             </Route>
                             <Route exact path="/users/view/:id">
                                 <ViewUser />
+                            </Route>
+                            <Route exact path="/profiles">
+                                <Profiles />
                             </Route>
                             <Route>
                                 <Error />

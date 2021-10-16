@@ -52,6 +52,22 @@
     font-size: 14px;
 }
 
+.disabledformInput{
+    height: 40px;
+    padding: 2px;
+    padding-left: 6px;
+    color:#9696A9;
+    background-color: #F7F7F7;
+    border-width: 1px;
+    border-style: solid;
+    border-color:#D5DADF;
+    border-radius: 3px;
+    margin: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+}
+
 .selectorforminput{
     color: #4D4D6F;
     padding: 5px;

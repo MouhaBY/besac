@@ -68,7 +68,7 @@ function Navigation(){
                 showUsers &&
                     <div>
                         <SubSideButton name= "Comptes" url="/users" /> 
-                        <SubSideButton name= "Profils" url="/users" /> 
+                        <SubSideButton name= "Profils" url="profiles" /> 
                     </div>
             }
             <div onClick={()=>setShowConfiguration(!showConfiguration)}>

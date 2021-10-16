@@ -4,20 +4,23 @@ import { getUsersList, deleteUser } from '../../../WS/API';
 import { useHistory } from "react-router-dom";
 import { userDataContext } from '../../../utils/context';
 import DataTable from '../../../components/DataTable';
+import { getProfileName } from '../../../utils/profiles';
 
 
 const headers = [
-    {reference:"_id", name:'Id'}, 
-    {reference : "username", name: "Nom d'utilisateur"}, 
-    {reference:"contact", name:"Nom complet"}, 
-    {reference:"isAdmin", name:"Est Admin", type:"bool"}, 
-    {reference:"actions", name:"Actions", type:"actions"}
+    {reference: "username", name: "Nom d'utilisateur"}, 
+    {reference: "contact",  name: "Nom complet"}, 
+    {reference: "profileName",  name: "Profil"}, 
+    {reference: "isActive", name: "Actif", type:"bool"}, 
+    {reference: "actions",  name: "Actions", type:"actions"}
 ];
 
 const fetchUsers = (func1, func2) => {
     getUsersList().then(result =>{
-        func1(result.results);
-        func2(result.results)
+        let to_map_result = result.results
+        const mapped_result = to_map_result.map((row)=>({...row, profileName: getProfileName(row.profile)}))
+        func1(mapped_result);
+        func2(mapped_result)
     })
 }
 
@@ -47,7 +50,7 @@ function ListUsers(){
             setFilteredUsersList(usersList);
         }
         else{
-            let filtered_users_list = usersList.filter(user => (user.isAdmin === (e.target.value === "admin")))
+            let filtered_users_list = usersList.filter(user => (user.isActive === (e.target.value === "active")))
             setFilteredUsersList(filtered_users_list)
         }
     }
@@ -61,9 +64,9 @@ function ListUsers(){
             <h2 className="maintitle">Utilisateurs / Comptes des utilisateurs</h2>
             <div className="UsersButtonsContainer">
                 <select id="userTypesSelector" onChange={filter}>
-                    <option value="">Type de profil</option>
-                    <option value="user">Utilisateur</option>
-                    <option value="admin">Administrateur</option>
+                    <option value="">Etat</option>
+                    <option value="active">Actifs</option>
+                    <option value="deleted">Supprimés</option>
                 </select>
                 <a href="/users/add"><input id="addButton" type="button" value="Ajouter"/></a>
             </div>

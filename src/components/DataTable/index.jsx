@@ -18,7 +18,7 @@ function DataTable({ title, headers, datas, edit, editFunction, deletion, delete
                     <tr className="datatablerow" key={data._id}>
                         {headers.map((head) => (
                             (head?.type === "actions") ?
-                            <div key={data._id} className="Buttons">
+                            <div key={data._id} className="datatablebuttons">
                                 { view &&
                                 <input id="viewButton" type="button" value="Consuler" onClick={()=>{ viewFunction(data) }}/>}
                                 { edit && 

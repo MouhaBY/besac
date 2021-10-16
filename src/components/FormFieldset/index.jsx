@@ -7,7 +7,7 @@ function FormFieldset ({ value, setValue={nothingToDo}, choiceslist, type="text"
         type === "checkbox" ?
             <fieldset className="checkBoxContainer">
                 <label className="formTitle">{title}</label>
-                <input className="checkboxInput" type="checkbox" name={id} id={id} checked={value} disabled={disabled ? "disabled" : null} />
+                <input className="checkboxInput" type="checkbox" name={id} id={id} onChange={setValue} defaultChecked={value} disabled={disabled ? "disabled" : null} />
             </fieldset>
         :
             <fieldset className="forminputs">
@@ -19,7 +19,7 @@ function FormFieldset ({ value, setValue={nothingToDo}, choiceslist, type="text"
                         <option /*selected={choice._id === value ? "selected" : ""}*/ value={choice._id} key={choice._id}>{choice.name}</option>))}
                     </select>
                 :
-                    <input className={hasError  ? "errorformInput" : "formInput"} type={type} name={id} id={id} value={value} onChange={setValue} disabled={disabled ? "disabled" : null}/>
+                    <input className={hasError  ? "errorformInput" : disabled ? "disabledformInput" : "formInput"} type={type} name={id} id={id} value={value} onChange={setValue} disabled={disabled ? "disabled" : null}/>
                 }
             </fieldset>
     )

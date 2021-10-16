@@ -3,7 +3,7 @@ import './Header.css';
 import profilePic from '../../assets/profile.png';
 import burgerMenu from '../../assets/menu.png';
 import { showBarContext, userDataContext } from '../../utils/context';
-import { profiles_list } from '../../utils/profiles';
+import { getProfileName } from '../../utils/profiles';
 
 
 function Header({ setToken }) {
@@ -11,9 +11,7 @@ function Header({ setToken }) {
     const [dateState, setDateState] = useState(new Date());
     const { toggleShowBar } = useContext(showBarContext);
     const { userData } = useContext(userDataContext);
-    const myProfile = profiles_list.find((profile) => (
-        profile._id === userData?.profile
-    ));
+    const myProfile = getProfileName(userData?.profile);
 
     const disconnect = () => {
         const token = {token: null};
@@ -44,7 +42,7 @@ function Header({ setToken }) {
                 </h1>
                 <div className="headeruserdata">
                     <span id="headerusercontact">{userData?.contact }</span>
-                    <span id="headeruserprofile">{"(" + myProfile?.name + ")" }</span>
+                    <span id="headeruserprofile">{"(" + myProfile + ")" }</span>
                 </div>
                 <div className="profilepiccontainer" onClick={showMenu}>
                     <img id="profilepic" src={profilePic} alt="Profile" />
