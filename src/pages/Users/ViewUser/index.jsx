@@ -8,7 +8,6 @@ function ViewUser(){
     const { id } = useParams();
     const [user, setUser] = useState({});
 
-
     const getUserData = (userId) => {
         getUser(userId).then(result =>{
             setUser(result)
