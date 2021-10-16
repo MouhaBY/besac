@@ -3,9 +3,8 @@ import './DataTable.css';
 import checked from '../../assets/check.png';
 import unchecked from '../../assets/uncheck.png';
 
-const rowPerPage = 5;
 
-function createPagesNumbersArray(datas){
+function createPagesNumbersArray(datas, rowPerPage){
     let totalPages = Math.floor((datas.length)/rowPerPage);
     let remainder = (datas.length) % rowPerPage;
     if (remainder>0){ totalPages++ }
@@ -16,7 +15,7 @@ function createPagesNumbersArray(datas){
     return pagesNumbers
 }
 
-function filterDataPerPage(pageNumber, datas, setFunction){
+function filterDataPerPage(pageNumber, datas, setFunction, rowPerPage){
     var page_datas = []
     for (let i=((pageNumber*rowPerPage)-rowPerPage); (i< (pageNumber*rowPerPage)&& i<datas.length); i++){
         page_datas.push(datas[i])
@@ -28,27 +27,24 @@ function DataTable({ title, headers, datas, edit, editFunction, deletion, delete
     const [pagesNumbers, setPagesNumber] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [dataToShow, setDataToShow] = useState([])
+    const [rowPerPage, setRowPerPage] = useState(5)
 
     function nextPage(){
-        if(currentPage < pagesNumbers.length){ 
-            setCurrentPage(currentPage+1) 
-        }
+        if(currentPage < pagesNumbers.length){ setCurrentPage(currentPage+1) }
     }
 
-    function previousPage(){
-        if(currentPage > 1){ 
-            setCurrentPage(currentPage-1) 
-        }
+    function previousPage(){ 
+        if(currentPage > 1){  setCurrentPage(currentPage-1) }
     }
 
     useEffect(() => {
-        let pagesNumbersArray = createPagesNumbersArray(datas);
+        let pagesNumbersArray = createPagesNumbersArray(datas, rowPerPage);
         setPagesNumber(pagesNumbersArray);
-    }, [datas])
+    }, [datas, rowPerPage])
 
     useEffect(() => {
-        filterDataPerPage(currentPage, datas, setDataToShow)
-    }, [currentPage, datas])
+        filterDataPerPage(currentPage, datas, setDataToShow, rowPerPage)
+    }, [currentPage, datas, rowPerPage])
 
     return(
         <div className="DataTableContainer">
@@ -86,9 +82,16 @@ function DataTable({ title, headers, datas, edit, editFunction, deletion, delete
                     <input className="backPageButton" type="button" value="Précedent" onClick={previousPage}/>
                     {
                         pagesNumbers && pagesNumbers.map((pageNumber)=>(
-                        <input className={currentPage === pageNumber ? "SelectedPageNumberButton" : "PageNumberButton"} type="button" value={pageNumber} onClick={()=>{ setCurrentPage(pageNumber) }}/>))
+                            <input className={currentPage === pageNumber ? "SelectedPageNumberButton" : "PageNumberButton"} type="button" value={pageNumber} onClick={()=>{ setCurrentPage(pageNumber) }}/>
+                        ))
                     }
                     <input className="nextPageButton" type="button" value="Suivant" onClick={nextPage}/>
+                    <select className="numberPerPage" onChange={(e)=>setRowPerPage(e.target.value)} name="numberPerPage" id="numberPerPage" value={rowPerPage} >
+                        <option value={5}            key={1}>5</option>
+                        <option value={10}           key={2}>10</option>
+                        <option value={50}           key={3}>50</option>
+                        <option value={datas.length} key={4}>All</option>
+                    </select>
                 </div>
         </div>
     )

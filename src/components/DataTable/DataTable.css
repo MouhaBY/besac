@@ -201,3 +201,10 @@
     display: flex;
     align-self:flex-end;
 }
+
+.numberPerPage{
+    border-color: #F4F6F8;
+    border-top-right-radius: 5px ;
+    border-bottom-right-radius: 5px;
+    border-style: solid;
+}
