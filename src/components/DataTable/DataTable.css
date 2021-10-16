@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     height: auto;
-    min-height: 200px;
+    min-height: 400px;
     padding: 15px;
 }
 
@@ -137,4 +137,67 @@
     width: auto;
     height: 20px;
     margin: 0px;
+}
+
+.SelectedPageNumberButton{
+    height: 35px;
+    width: 30px;
+    border: 2px;
+    border-color: #F4F6F8;
+    background-color: #1094F7;
+    color: white;
+}
+
+.PageNumberButton{
+    height: 35px;
+    width: 30px;
+    border: 2px;
+    border-style: solid;
+    border-color: #F4F6F8;
+    background-color: white;
+    color: #1094F7;
+}
+
+.PageNumberButton:hover{
+    background-color: #1094F7;
+    color: white;
+}
+
+.nextPageButton{
+    height: 35px;
+    width: 70px;
+    border-color: #F4F6F8;
+    background-color: white;
+    color: black;
+    border-top-right-radius: 5px ;
+    border-bottom-right-radius: 5px;
+    border-style: solid;
+}
+
+.nextPageButton:hover{
+    background-color: #1094F7;
+    color: white;
+}
+
+.backPageButton{
+    height: 35px;
+    width: 80px;
+    background-color: white;
+    color: black;
+    border-color: #F4F6F8;
+    border-top-left-radius: 5px ;
+    border-bottom-left-radius: 5px;
+    border-style: solid;
+}
+
+.backPageButton:hover{
+    background-color: #1094F7;
+    color: white;
+}
+
+.buttonpages{
+    margin-top: auto;
+    margin-bottom: 0px;
+    display: flex;
+    align-self:flex-end;
 }
