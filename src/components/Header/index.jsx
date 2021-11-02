@@ -8,7 +8,7 @@ import { getProfileName } from '../../utils/profiles';
 
 function Header({ setToken }) {
     const [showDropdown, setShowDropdown] = useState();
-    const [dateState, setDateState] = useState(new Date());
+    const [dateState, setDateState] = useState(theDateNow());
     const { toggleShowBar } = useContext(showBarContext);
     const { userData } = useContext(userDataContext);
     const myProfile = getProfileName(userData?.profile);
@@ -22,9 +22,24 @@ function Header({ setToken }) {
         setShowDropdown(!showDropdown)
     }
 
+    function theDateNow(){
+        var newDate = new Date()
+        return(
+            newDate.toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'numeric',
+                year: 'numeric',
+                hour : "2-digit",
+                minute : "2-digit",
+                timeZoneName : "short"
+            })
+        )
+    }
+
     useEffect(() => {
-        setInterval(() => setDateState(new Date()), 30000);
-      }, []);
+        setInterval(() => setDateState(theDateNow()), 30000);
+    }, []);
 
     return(
         <div className="headercontainer">
@@ -33,13 +48,7 @@ function Header({ setToken }) {
                     <img id="burgermenuimg" src={burgerMenu} alt="burgerMenu" />
                 </div>
                 <h1 className="headertitle">Scan Access Control</h1>
-                <h1 className="headertime">{dateState.toLocaleDateString('en-GB', {
-                    day: 'numeric',
-                    month: 'numeric',
-                    year: 'numeric',
-                    hour : "2-digit",
-                    minute : "2-digit",})}
-                </h1>
+                <h1 className="headertime">{dateState}</h1>
                 <div className="headeruserdata">
                     <span id="headerusercontact">{userData?.contact }</span>
                     <span id="headeruserprofile">{"(" + myProfile + ")" }</span>

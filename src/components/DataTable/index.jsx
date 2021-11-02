@@ -8,10 +8,11 @@ function createPagesNumbersArray(datas, rowPerPage){
     let totalPages = Math.floor((datas.length)/rowPerPage);
     let remainder = (datas.length) % rowPerPage;
     if (remainder>0){ totalPages++ }
-    let pagesNumbers=[];
-    for (let i=0; i< totalPages; i++){
+    //let pagesNumbers=[];
+    let pagesNumbers = Array.from({length: totalPages}, (v, k) => k+1);
+    /*for (let i=0; i< totalPages; i++){
         pagesNumbers.push(i+1)
-    }
+    }*/
     return pagesNumbers
 }
 

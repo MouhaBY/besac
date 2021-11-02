@@ -1,4 +1,4 @@
-const serverAddress = "192.168.1.15:3001";
+const serverAddress = "127.0.0.1:3001";
 
 export async function loginUser(credentials) {
   return fetch('http://'+serverAddress+'/api/auth/login', {

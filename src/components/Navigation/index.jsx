@@ -45,6 +45,7 @@ function Navigation(){
             {
                 showExploitation &&
                     <div>
+                        <SubSideButton name= "Temps & Activités" url="/activities" /> 
                         <SubSideButton name= "Présences" url="/exploitations" /> 
                         <SubSideButton name= "Absences" url="/exploitations" /> 
                         <SubSideButton name= "Anomalies" url="/exploitations" /> 
