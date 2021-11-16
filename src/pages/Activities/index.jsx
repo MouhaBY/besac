@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { getISOWeek, nextSunday, previousMonday, isMonday, isSunday, formatISO, add, getDay } from 'date-fns';
+import ActivitiesTable from '../../components/ActivitiesTable';
 import './Activities.css';
 import rightArrow from "../../assets/right-arrow.png";
 import cross from "../../assets/cross.png";
 import searching from "../../assets/searching.png";
-import {presence, employees, timesheet} from "./ActivitiesDetails";
+import { presence, employees } from "./ActivitiesDetails";
+
 
 const criterias = [
     {value:"matricule", name:"Matricule"}, 
@@ -15,25 +18,39 @@ const criterias = [
 const employeesHeaders = [{reference:"name", name:"Nom"}, {reference:"subname", name:"Prénom"}, {reference:"matricule", name:"Matricule"}, {reference:"service", name:"Service"}, {reference:"timesheet", name:"Feuille de temps"}, ]
 
 function getYearsOptions(thisYear){
-    var years = []
-    for (let i = thisYear-5; i <= thisYear+5; i++) {
-        years.push(i);
-    }
+    const years = Array.from({length: 5}, (v, k) => thisYear-5+k+1);
     return years
 }
 
-function getThisWeek(currentdate){
-    var oneJan = new Date(currentdate.getFullYear(),0,1);
-    var numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-    var result = Math.ceil(( currentdate.getDay() + 1 + numberOfDays) / 7);
-    return result
+function getWeeksNumberOptions(year){
+    const lastDayWeekNumber = getISOWeek(new Date(year, 11, 28));
+    const weeks = Array.from({length: lastDayWeekNumber}, (v, k) => k+1);
+    return weeks
 }
 
-function getWeeksNumberOptions(year){
-    var lastDay = new Date(year,11,31);
-    let lasWeek = getThisWeek(lastDay);
-    const weeks = Array.from({length: lasWeek}, (v, k) => k+1);
-    return weeks
+// Copié de la communauté
+function getDateOfISOWeek(w, y) {
+    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4)
+        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else
+        ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    return ISOweekStart;
+}
+
+function whatDay(day){
+    switch(day){
+        case 0 : return "Di.";
+        case 1 : return "Lu.";
+        case 2 : return "Ma.";
+        case 3 : return "Me.";
+        case 4 : return "Je.";
+        case 5 : return "Ve.";
+        case 6 : return "Sa.";
+        default : return "error";
+    }
 }
 
 function getDateCorrectFormat(date){
@@ -42,62 +59,6 @@ function getDateCorrectFormat(date){
         return thisDate
     }
     else return "----/--/--"
-}
-
-function getSunday(selected_date){
-    let weekday = selected_date.toLocaleDateString('en-EN', { weekday: 'long' });
-
-    switch (weekday) {
-        case 'Monday':
-            return ( d => new Date( d.setDate(selected_date.getDate()+6)) )(new Date());
-        case 'Tuesday':
-            return ( d => new Date( d.setDate(selected_date.getDate()+5)) )(new Date());
-        case 'Wednesday':
-            return ( d => new Date( d.setDate(selected_date.getDate()+4)) )(new Date());
-        case 'Thursday':
-            return ( d => new Date( d.setDate(selected_date.getDate()+3)) )(new Date());
-        case 'Friday':
-            return ( d => new Date( d.setDate(selected_date.getDate()+2)) )(new Date());
-        case 'Saturday':
-            return ( d => new Date( d.setDate(selected_date.getDate()+1)) )(new Date());
-        case 'Sunday':
-            return ( d => new Date( d.setDate(selected_date.getDate())) )(new Date());
-        default: 
-            return ( d => new Date());
-    }
-}
-
-function getMonday(selected_date){
-
-    let weekday = selected_date.toLocaleDateString('en-EN', { weekday: 'long' });
-
-    switch (weekday) {
-        case 'Monday':
-            return ( d => new Date( d.setDate(selected_date.getDate())) )(new Date());
-        case 'Tuesday':
-            return ( d => new Date( d.setDate(selected_date.getDate()-1)) )(new Date());
-        case 'Wednesday':
-            return ( d => new Date( d.setDate(selected_date.getDate()-2)) )(new Date());
-        case 'Thursday':
-            return ( d => new Date( d.setDate(selected_date.getDate()-3)) )(new Date());
-        case 'Friday':
-            return ( d => new Date( d.setDate(selected_date.getDate()-4)) )(new Date());
-        case 'Saturday':
-            return ( d => new Date( d.setDate(selected_date.getDate()-5)) )(new Date());
-        case 'Sunday':
-            return ( d => new Date( d.setDate(selected_date.getDate()-6)) )(new Date());
-        default: 
-            return ( d => new Date());
-    }
-}
-
-function calculatePresenceState(difference, theorical){
-
-    if (difference < 0){
-        if (difference + theorical === 0) return "Absence"
-        else return " Anomalie "
-    } 
-    else return "OK"
 }
 
 
@@ -111,7 +72,7 @@ function Activities(){
     const [employee, setEmployee] = useState();
     const [filteredEmployees, setFilteredEmployees] = useState([]);
 
-    const [thisTenYears, setThisTenYears] = useState([])
+    const [yearsOptions, setYearsOptions] = useState([])
     const [thisYearWeeks, setThisYearWeeks] = useState([])
     
     const [selectedYear, setSelectedYear] = useState();
@@ -121,38 +82,71 @@ function Activities(){
     const [dateFrom, setDateFrom] = useState();
     const [dateTo, setDateTo] = useState();
     const [dateInterval, setDateInterval] = useState([]);
+    const [daysInterval, setDaysInterval] = useState([]);
 
     const [userPresence, setUserPresence] = useState([]);
 
+
     useEffect(() => {
         let today = new Date();
-
-        setThisTenYears( getYearsOptions(today.getFullYear()) );
-        setThisYearWeeks( getWeeksNumberOptions(today.getFullYear()) );
-
-        setSelectedYear( today.getFullYear() );
-        setSelectedWeek( getThisWeek(today) );
+        setYearsOptions( getYearsOptions(today.getFullYear()) );
         setSelectedDate(today);
-        setDateFrom( getMonday(today) );
-        setDateTo( getSunday(today) );
     }, []);
+
+
+    useEffect(() => {
+        setThisYearWeeks( getWeeksNumberOptions(selectedYear) );
+    }
+    ,[selectedYear]);
+
+
+    useEffect(() => {
+        if (selectedYear && selectedWeek){
+            let dateFromWeek = getDateOfISOWeek(selectedWeek,selectedYear);
+            if (isMonday(dateFromWeek)){ setDateFrom(dateFromWeek)} else { setDateFrom(previousMonday(dateFromWeek)) }
+            if (isSunday(dateFromWeek)){ setDateTo(dateFromWeek)} else { setDateTo(nextSunday(dateFromWeek)); }
+        }
+    }, [selectedYear,selectedWeek]);
+
+
+    useEffect(() => {
+        if(selectedDate){
+            setSelectedYear( selectedDate.getFullYear() );
+            setSelectedWeek( getISOWeek(selectedDate) );
+        }
+    }
+    ,[selectedDate]);
+
+
+    useEffect(() => {
+        if (dateFrom){
+            console.log(dateFrom)
+            var date = dateFrom;
+            var dates = [];
+            var days = [];
+            for(let i=0;i<7;i++){
+                days.push(whatDay(getDay(date)));
+                dates.push(formatISO(date, { representation: 'date' }));
+                date = add(date, { days: 1 });
+            }
+            setDaysInterval(days);
+            setDateInterval(dates);
+        }
+    }, [dateTo,dateFrom]);
+
 
     useEffect(() => {
         let employee_presence = presence.filter((present)=>(employee?._id === present.employee_id))
         setUserPresence(employee_presence)
     }, [employee]);
 
-    useEffect(() => {
-        let dates = ["18/10/2021", "19/10/2021", "20/10/2021", "21/10/2021", "22/10/2021", "23/10/2021", "24/10/2021"]
-        setDateInterval(dates)
-    }, [dateFrom, dateTo]);
 
     function filterEmployees(){ setFilteredEmployees(employees) }
 
     const handleSubmit = (evt) =>{ evt.preventDefault(); }
 
     function clearEmployee(){
-        setEmployee({});
+        setEmployee();
         setSearchEmployee("");
         setFilteredEmployees([]);
         setCriteria();
@@ -161,10 +155,8 @@ function Activities(){
     function calculateDates(evt){
         let date_value = new Date(evt.target.value);
         setSelectedDate( date_value );
-        setDateFrom( getMonday(date_value) );
-        setDateTo( getSunday(date_value) );
-        setSelectedWeek( getThisWeek(date_value) );
     }
+
 
     return(
         <div className="activitiescontainer">
@@ -236,8 +228,8 @@ function Activities(){
                 <form className="rowsubcardcomponent">
                     <label className="periodlabel" >Année </label>
                     <select className="selectinput" onChange={(e)=>setSelectedYear(e.target.value)} name="year" id="year" value={selectedYear}>
-                        { thisTenYears.map((year_from_ten, index)=>
-                        <option value={year_from_ten} key={`year_from_ten${index}`}>{year_from_ten}</option>
+                        { yearsOptions.map((year, index)=>
+                        <option value={year} key={`year${index}`}>{year}</option>
                         )}
                     </select>
                     <label className="periodlabel">Semaine </label>
@@ -269,53 +261,7 @@ function Activities(){
                 </div>
                 {activitiesCardOpened &&
                 <div className="subcardcomponent">
-                    <table className="activitiestable">
-                        <thead>
-                            <tr>
-                                <th className="activitiestableheadcell" colSpan="2" rowSpan="2">{"Semaine N°" + selectedWeek}</th>
-                                <th className="activitiestableheadcell" colSpan="2">Présence</th>
-                                <th className="activitiestableheadcell" rowSpan="2">Etat</th>
-                                <th className="activitiestableheadcell" colSpan="3">Résultat</th>
-                                <th className="activitiestableheadcell" rowSpan="2">Commentaire</th>
-                            </tr>
-                            <tr>
-                                <th className="activitiestableheadcell" >Entrée 1</th>
-                                <th className="activitiestableheadcell" >Sortie 1</th>
-                                <th className="activitiestableheadcell" >Théorique</th>
-                                <th className="activitiestableheadcell" >Effectué</th>
-                                <th className="activitiestableheadcell" >Différence</th>
-                            </tr>
-                        </thead>
-                    <tbody>
-                        {
-                          employee && dateInterval && dateInterval.map((date) =>{
-                            var presence_day = userPresence.find(element => element.date === date);
-                            let timeSheet = timesheet.find(element => element._id === employee?.timesheetDetails[dateInterval.indexOf(date)])
-                            return(
-                                <tr key={date}>
-                                    <td className="activitiestablerowcell">{date || ""}</td>
-                                    <td className="activitiestablerowcell">{timeSheet?.name || ""}</td>
-                                    <td className="activitiestablerowcell">{presence_day?.firstIn || "00:00"}</td>
-                                    <td className="activitiestablerowcell">{presence_day?.lastOut || "00:00"}</td>
-                                    <td className="activitiestablerowcell">{calculatePresenceState((-1 * (timeSheet?.theorical - ((presence_day?.lastOut || (timeSheet?.break || 0)) - (presence_day?.firstIn|| 0) - (timeSheet?.break || 0)))), timeSheet?.theorical) || ""}</td>
-                                    <td className="activitiestablerowcell">{timeSheet?.theorical}</td>
-                                    <td className="activitiestablerowcell">{((presence_day?.lastOut || (timeSheet?.break || 0)) - (presence_day?.firstIn || 0) - (timeSheet?.break || 0)) }</td>
-                                    <td className="activitiestablerowcell">{-1 * (timeSheet?.theorical - ((presence_day?.lastOut || (timeSheet?.break || 0)) - (presence_day?.firstIn|| 0) - (timeSheet?.break || 0))) }</td>
-                                    <td className="activitiestablerowcell">{presence_day?.comment || ""}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colSpan="2">{"Total de la Semaine N°" + selectedWeek}</th>
-                            <th colSpan="3"></th>
-                            <th>400</th>
-                            <th>250</th>
-                            <th>150</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                    <ActivitiesTable selectedWeek={selectedWeek} employee={employee} dateInterval={dateInterval} daysInterval={daysInterval} userPresence={userPresence} />
                 </div>}
             </div>
         </div>

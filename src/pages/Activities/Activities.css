@@ -41,7 +41,7 @@
 .cardtitle{
     margin: 0px;
     color:black;
-    font-weight: bold;
+    font-weight: normal;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
 }
@@ -55,6 +55,7 @@
     align-items: center;
     margin-top: 15px;
     flex-direction: row;
+    padding: 0px;
 }
 
 /* Sous menu informations sur l'employé choisi */
@@ -81,7 +82,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
     color: #1D0E01;
-    background-color: #E6E6FF;
+    background-color: #e3f2fd;
     border-width: 1px;
     border-style: solid;
     border-color: white;
@@ -93,10 +94,10 @@
     width:200px;
     padding: 0px;
     height: 35px;
-    color: #8690FA;
+    color: #1565c0;
     font-size: 13px;
     border: none;
-    border-bottom: 2px solid #969FFB;
+    border-bottom: 1px solid #1565c0;
 }
 
 #searchimg{
@@ -114,16 +115,18 @@
 }
 
 .selectinput{
-    color: #8690FA;
+    color: #1565c0;
     justify-content: center;
     width: auto;
-    padding: 8px;
+    padding: 0px;
+    padding-left: 8px;
     height: 35px;
     font-size: 13px;
-    border: 2px solid #969FFB;
+    border: 1px solid #1565c0;
     border-radius: 17px;
     outline: none;
     margin-left: 4px;
+    background-color: transparent;
 }
 
 /* Le tableau des employés */
@@ -172,9 +175,9 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
     font-weight: normal;
-    color: #8690FA;
+    color: #1565c0;
     border: none;
-    border-bottom: 2px solid #969FFB;
+    border-bottom: 1px solid #1565c0;
     width: 60px;
 }
 
@@ -184,42 +187,9 @@
     padding-left: 8px;
     padding-right: 8px;
     height: 32px;
-    color: #8690FA;
+    color: #1565c0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 13px;
-    border: 2px solid #969FFB;
+    border: 1px solid #1565c0;
     border-radius: 17px;
-}
-
-/* Tableau de présence */
-
-.activitiestable{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 14px;
-    width: 100%;
-    border-spacing: 0px;
-}
-
-.activitiestableheadcell{
-    text-align: center;
-    border: 1px solid white;
-    background-color: #E6E6FF;
-    padding: 5px;
-    width: auto;
-    min-width: 70px;
-    height: 15px;
-    font-weight: normal;
-}
-
-.activitiestablerowcell{
-    border: 1px solid #B3B3B3;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    padding-right: 7px;
-    padding-left: 7px;
-    text-align: center;
-    height: 30px;
-    min-width: 40px;
-    max-width: 170px;
 }

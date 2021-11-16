@@ -6,7 +6,64 @@ export const employees = [
         matricule:"M010254",
         service:"Service ingenierie",
         timesheet:"Cadres",
-        timesheetDetails:["1","1","1","1","1","2","3"],
+        timesheetDetails:[
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"2",
+                name:"Demi Repos",
+                firstIn:8,
+                lastOut:13,
+                theorical:5,
+                break:0
+            },
+            {
+                _id:"3",
+                name:"Jours Repos",
+                firstIn:0,
+                lastOut:0,
+                theorical:0,
+                break:0
+            }
+        ],
     },
     {
         _id:"2",
@@ -15,23 +72,146 @@ export const employees = [
         matricule:"M010255",
         service:"Service commercial",
         timesheet:"Administratif",
-        timesheetDetails:["1","1","1","1","1","3","3"],
-    }
+        timesheetDetails:[
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"3",
+                name:"Jours Repos",
+                firstIn:0,
+                lastOut:0,
+                theorical:0,
+                break:0
+            },
+            {
+                _id:"3",
+                name:"Jours Repos",
+                firstIn:0,
+                lastOut:0,
+                theorical:0,
+                break:0
+            }
+        ],
+    },
+    {
+        _id:"3",
+        name:"Zied",
+        subname:"JAZIRI",
+        matricule:"M010254",
+        service:"Service inventaires",
+        timesheet:"Commercial",
+        timesheetDetails:[
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"1",
+                name:"H. Cadres",
+                firstIn:8,
+                lastOut:17,
+                theorical:8,
+                break:1
+            },
+            {
+                _id:"2",
+                name:"Demi Repos",
+                firstIn:8,
+                lastOut:13,
+                theorical:5,
+                break:0
+            },
+            {
+                _id:"3",
+                name:"Jours Repos",
+                firstIn:0,
+                lastOut:0,
+                theorical:0,
+                break:0
+            }
+        ],
+    },
 ]
 
 export const presence = [
     {
         _id:"1",
         employee_id:"1",
-        date:"18/10/2021",
+        date:"2021-10-18",
         firstIn:8,
         lastOut:17,
-        comment:"rien à signaler"
+        comment:""
     },
     {
         _id:"2",
         employee_id:"1",
-        date:"23/10/2021",
+        date:"2021-10-23",
         firstIn:8,
         lastOut:12,
         comment:"Sortie anticipée via autorisation verbale"
@@ -39,36 +219,17 @@ export const presence = [
     {
         _id:"3",
         employee_id:"1",
-        date:"19/10/2021",
+        date:"2021-10-19",
         firstIn:8,
         lastOut:19,
-        comment:"extra work"
-    },
-]
-
-export const timesheet = [
-    {
-        _id:"1",
-        name:"H. Cadres",
-        firstIn:8,
-        lastOut:17,
-        theorical:8,
-        break:1
+        comment:"extra work non facturé"
     },
     {
-        _id:"2",
-        name:"Demi Repos",
-        firstIn:8,
-        lastOut:13,
-        theorical:5,
-        break:0
-    },
-    {
-        _id:"3",
-        name:"Jours Repos",
-        firstIn:0,
-        lastOut:0,
-        theorical:0,
-        break:0
+        _id:"4",
+        employee_id:"1",
+        date:"2021-10-20",
+        firstIn:9,
+        lastOut:18,
+        comment:""
     }
 ]
